@@ -1,0 +1,40 @@
+# name: Deployment DEVELOP
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   quality:
+#     name: Quality check
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
+
+#       - name: Install dependencies
+#         run: npm ci
+
+#       - name: Linting
+#         run: npm run lint
+
+#   Deployment:
+#     runs-on: ubuntu-latest
+#     needs: [quality]
+#     strategy:
+#       matrix:
+#         node-version: [22.x]
+#     steps:
+#       - name: Use Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Deployment
+#         uses: serverless/github-action@v4
+#         with:
+#           args: -c "ls && serverless plugin install -n serverless-lift && serverless deploy -s prod --verbose"
+#           entrypoint: /bin/sh
+#       #   env:
